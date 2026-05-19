@@ -1,0 +1,36 @@
+@startuml
+'Диаграмма последовательности Цветочного магазина
+alt#Gold #LightBlue Запрос остатка по цветам
+Sellers -> Frontend: Запрос остатка цветов
+Activate Frontend #Aqua
+Frontend -> Backend: Запрос данных в БД
+Activate Backend #Aqua
+Backend -> Backend: Чтение данных из БД
+Frontend <- Backend: Передача данных на Frontend
+Deactivate Backend
+Sellers <- Frontend: Отображение остатка по цветам
+Deactivate Frontend
+end
+alt#Fuchsia #Cyan Добавление цветов на склад
+Sellers -> Frontend: Добавление цветов на склад
+Activate Frontend #Chartreuse
+Frontend -> Backend: Запись данных в БД
+Activate Backend #Chartreuse
+Backend -> Backend: Запись данных в БД
+Frontend <- Backend: Передача данных на Frontend
+Deactivate Backend
+Sellers <- Frontend: Отображение остатка по цветам
+Deactivate Frontend
+end
+alt#Magenta #Violet Удаление цветов на склад
+Sellers -> Frontend: Удаление цветов на склад
+Activate Frontend #Yellow
+Frontend -> Backend: Удаление данных в БД
+Activate Backend #Yellow
+Backend -> Backend: Удаление записей данных из БД
+Frontend <- Backend: Передача данных на Frontend
+Deactivate Backend
+Sellers <- Frontend: Отображение остатка по цветам
+Deactivate Frontend
+end
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+package "Flower Shop" {
+component  WebServer #Yellow
+database Production #GreenYellow
+
+WebServer -right- JDBC
+Production -left- JDBC
+}
+
+WebServer -left- HTTPS
+@enduml
