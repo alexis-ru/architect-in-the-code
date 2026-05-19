@@ -1,0 +1,83 @@
+specification {
+  element actor
+  element system
+  element component
+
+  tag ui {
+    color #33B074
+  }
+  tag back {
+    color #D6409F
+  }
+  tag user {
+    color rgb(225, 238, 50)
+  }
+}
+
+model {
+  customer = actor 'Sellers' {
+    #user
+    description "Seller sees the remaining stock in the flower shop's warehouse"
+    style {
+        shape person
+      }
+  }
+
+  saas = system 'Flower shop' {
+    description '
+      Container layer
+    '
+    
+    component ui 'Frontend' {
+      #ui
+      description 'JavaScript application displays data for a flower shop salesperson.'
+      style {
+        icon tech:javascript
+        shape browser
+      }
+    }
+
+    component backend 'Backend Services' {
+      #back
+      description '
+        Stores data on the movement of flowers in a flower shop
+      '
+      style {
+        icon tech:postgresql
+        color secondary
+        shape storage
+      }
+    }
+
+    // UI requests data from the Backend
+    ui -> backend 'interacts via JDBC'
+  }
+
+  // Customer uses the UI
+  customer -> ui 'opens in browser'
+  customer -> saas 'enjoys our product'
+}
+
+views {
+
+  view index {
+    title 'Landscape view'
+    description '
+        Context layer
+      '
+    include *
+  }
+
+  view saas of saas {
+    include *
+
+    style * {
+      opacity 25%
+    }
+    style customer {
+      color green
+    }
+  }
+
+}
+
